@@ -1,0 +1,42 @@
+<%= form_with(model: book_issue, local: true) do |form| %>
+  <% if book_issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book_issue.errors.count, "error") %> prohibited this book_issue from being saved:</h2>
+
+      <ul>
+      <% book_issue.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <%= form.select("book_id", Book.all.collect{ |book| [book.title, book.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.select("user_id", User.all.collect{ |user| [user.name, user.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :librarian_id %>
+    <%= form.select("librarian_id", Librarian.all.collect{ |librarian| [librarian.name, librarian.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issue_date %>
+    <%= form.date_select :issue_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :return_date %>
+    <%= form.date_select :return_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

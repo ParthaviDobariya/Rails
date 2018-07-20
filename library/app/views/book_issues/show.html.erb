@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Issue date:</strong>
+  <%= @book_issue.issue_date %>
+</p>
+
+<p>
+  <strong>Return date:</strong>
+  <%= @book_issue.return_date %>
+</p>
+
+<%= link_to 'Edit', edit_book_issue_path(@book_issue) %> |
+<%= link_to 'Back', book_issues_path %>
