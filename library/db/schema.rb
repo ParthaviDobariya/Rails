@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_20_124144) do
+ActiveRecord::Schema.define(version: 2018_07_23_073156) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", limit: 255
@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_124144) do
     t.string "website", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_authors_on_email", unique: true
-    t.index ["name"], name: "index_authors_on_name", unique: true
   end
 
   create_table "book_issues", force: :cascade do |t|
@@ -45,7 +43,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_124144) do
     t.integer "publication_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["isbn_no"], name: "index_books_on_isbn_no", unique: true
     t.index ["publication_id"], name: "index_books_on_publication_id"
   end
 
@@ -79,8 +76,18 @@ ActiveRecord::Schema.define(version: 2018_07_20_124144) do
     t.string "address", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mobile_no"], name: "index_librarians_on_mobile_no", unique: true
-    t.index ["name"], name: "index_librarians_on_name", unique: true
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_librarians_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_librarians_on_reset_password_token", unique: true
   end
 
   create_table "publications", force: :cascade do |t|
@@ -89,7 +96,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_124144) do
     t.string "website", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_publications_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,9 +105,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_124144) do
     t.string "address", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["mobile_no"], name: "index_users_on_mobile_no", unique: true
-    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
 end

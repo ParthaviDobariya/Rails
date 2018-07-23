@@ -7,7 +7,5 @@ class CreateLibrarians < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :librarians, :name, unique: true
-    add_index :librarians, :mobile_no, unique: true
   end
 end

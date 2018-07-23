@@ -1,6 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>User:</strong>
+  <%= @book_issue.user.name %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @book_issue.book.title %>
+</p>
+
+<p>
   <strong>Issue date:</strong>
   <%= @book_issue.issue_date %>
 </p>
