@@ -15,5 +15,12 @@
   <%= @publication.website %>
 </p>
 
+<p>
+  <strong>Books:</strong>
+  <% @publication.books.each do |book| %>
+    <%= book.title %>
+  <%end%>
+</p>
+
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>

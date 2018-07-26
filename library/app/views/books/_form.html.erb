@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :publish_date %>
-    <%= form.date_select :publish_date %>
+    <%= form.date_select :publish_date, start_year: Time.now.year-18, end_year: Time.now.year %>
   </div>
 
   <div class="field">
@@ -39,6 +39,34 @@
   <div class="field">
     <%= form.label :publication_id %>
     <%= form.select("publication_id", Publication.all.collect{ |p| [p.name, p.id]}) %>
+  </div>
+
+  <div>
+    <p><strong>Authors :</strong></p>
+
+    <div id="author">
+      <%= form.fields_for :books_authors do |author| %>
+        <%= render 'books_author_fields', f: author %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'add author', form, :books_authors %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p><strong>Category :</strong></p>
+
+    <div id="category">
+      <%= form.fields_for :books_categories do |category| %>
+        <%= render 'books_category_fields', f: category %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'add category', form, :books_categories %>
+      </div>
+    </div>
   </div>
 
   <div class="actions">

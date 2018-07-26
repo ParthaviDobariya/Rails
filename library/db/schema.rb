@@ -12,19 +12,19 @@
 
 ActiveRecord::Schema.define(version: 2018_07_23_073156) do
 
-  create_table "authors", force: :cascade do |t|
-    t.string "name", limit: 255
+  create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.date "birth_date"
-    t.string "email", limit: 255
-    t.string "website", limit: 255
+    t.string "email"
+    t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "book_issues", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "user_id"
-    t.integer "librarian_id"
+  create_table "book_issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "user_id"
+    t.bigint "librarian_id"
     t.date "issue_date"
     t.date "return_date"
     t.datetime "created_at", null: false
@@ -34,44 +34,44 @@ ActiveRecord::Schema.define(version: 2018_07_23_073156) do
     t.index ["user_id"], name: "index_book_issues_on_user_id"
   end
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "isbn_no", limit: 13
-    t.string "title", limit: 255
-    t.integer "number_of_books", limit: 4
+    t.string "title"
+    t.integer "number_of_books"
     t.date "publish_date"
-    t.integer "pages", limit: 5
-    t.integer "publication_id"
+    t.bigint "pages"
+    t.bigint "publication_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publication_id"], name: "index_books_on_publication_id"
   end
 
-  create_table "books_authors", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "author_id"
+  create_table "books_authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_books_authors_on_author_id"
     t.index ["book_id"], name: "index_books_authors_on_book_id"
   end
 
-  create_table "books_categories", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "category_id"
+  create_table "books_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_books_categories_on_book_id"
     t.index ["category_id"], name: "index_books_categories_on_category_id"
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name", limit: 255
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "librarians", force: :cascade do |t|
-    t.string "name", limit: 255
+  create_table "librarians", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.string "mobile_no", limit: 15
     t.string "address", limit: 1000
     t.datetime "created_at", null: false
@@ -90,21 +90,29 @@ ActiveRecord::Schema.define(version: 2018_07_23_073156) do
     t.index ["reset_password_token"], name: "index_librarians_on_reset_password_token", unique: true
   end
 
-  create_table "publications", force: :cascade do |t|
-    t.string "name", limit: 255
+  create_table "publications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.string "address", limit: 1000
-    t.string "website", limit: 255
+    t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", limit: 255
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.string "mobile_no", limit: 15
-    t.string "email", limit: 255
+    t.string "email"
     t.string "address", limit: 1000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "book_issues", "books"
+  add_foreign_key "book_issues", "librarians"
+  add_foreign_key "book_issues", "users"
+  add_foreign_key "books", "publications"
+  add_foreign_key "books_authors", "authors"
+  add_foreign_key "books_authors", "books"
+  add_foreign_key "books_categories", "books"
+  add_foreign_key "books_categories", "categories"
 end

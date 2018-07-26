@@ -11,6 +11,9 @@
       <th>Publish date</th>
       <th>Pages</th>
       <th>Publication</th>
+      <th>Authors</th>
+      <th>Categories</th>
+      <th>Users</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +27,21 @@
         <td><%= book.publish_date %></td>
         <td><%= book.pages %></td>
         <td><%= book.publication.name%></td>
+        <td>
+          <% book.authors.each do |author| %>
+            <%= author.name %> 
+          <% end %>
+        </td>
+        <td>
+          <% book.categories.each do |category| %>
+            <%= category.name %> 
+          <% end %>
+        </td>
+        <td>
+          <% book.users.each do |user| %>
+            <%= user.name %> 
+          <% end %>
+        </td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,7 +49,7 @@
     <% end %>
   </tbody>
 </table>
-
+  
 <br>
 
 <%= link_to 'New Book', new_book_path %>

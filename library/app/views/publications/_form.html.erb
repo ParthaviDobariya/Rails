@@ -26,6 +26,20 @@
     <%= form.text_field :website %>
   </div>
 
+  <div>
+    <p><strong>Books :</strong></p>
+
+    <div id="book">
+      <%= form.fields_for :books do |book| %>
+        <%= render 'book_fields', f: book %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'add books', form, :books, partial: "book_fields" %>
+      </div>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
