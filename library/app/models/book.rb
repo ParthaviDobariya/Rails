@@ -7,6 +7,8 @@ class Book < ApplicationRecord
 	validates :publish_date, 	presence: true
 	
 	belongs_to :publication
+
+	has_one_attached :image
 	
 	has_many :book_issues, dependent: :destroy
 	has_many :users, through: :book_issues

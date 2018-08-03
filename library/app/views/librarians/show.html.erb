@@ -1,19 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="main">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @librarian.name %>
-</p>
+	<p>
+	  <strong>Name:</strong>
+	  <%= @librarian.name %>
+	</p>
 
-<p>
-  <strong>Mobile no:</strong>
-  <%= @librarian.mobile_no %>
-</p>
+	<p>
+	  <strong>Mobile no:</strong>
+	  <%= @librarian.mobile_no %>
+	</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @librarian.address %>
-</p>
+	<p>
+	  <strong>Address:</strong>
+	  <%= @librarian.address %>
+	</p>
 
-<%= link_to 'Edit', edit_librarian_path(@librarian) %> |
-<%= link_to 'Back', librarians_path %>
+	<%= link_to 'Edit', edit_librarian_path(@librarian) %> |
+	<%= link_to 'Back', librarians_path %>
+</div>

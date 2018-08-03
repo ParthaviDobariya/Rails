@@ -1,39 +1,69 @@
-<p id="notice"><%= notice %></p>
+<div class="main">  
 
-<h1>Authors</h1>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li id="main_title">Authors</li>
+      </ul>
+      <ul class="nav navbar-nav right">
+        <li id="new_link"><%= link_to 'Add New Author', new_author_path, class: " new_link" %></li>
+      </ul>
+    </div>
+  </nav>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Birth date</th>
-      <th>Email</th>
-      <th>Website</th>
-      <th>Book</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="container"> 
+    <div class="row">
+      <% @authors.each do |author| %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card ">
+            <h3 class="card-header"><%= author.name %></h3>
+            <div class="card-body">
+              <div class="form-group row">
+                <div class="col-4">
+                  Birth Date 
+                </div>
+                <div class="col-8">
+                  <%= author.birth_date %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-4">
+                  Email 
+                </div>
+                <div class="col-8">
+                  <%= author.email %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-4">
+                  Website 
+                </div>
+                <div class="col-8">
+                  <%= author.website %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-4">
+                  Books
+                </div>
+                <div class="col-8">
+                  <% author.books.each do |book| %>
+                    <%= book.title %> 
+                  <% end %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-8"> 
+                  <%= link_to 'Show', author %>
+                  <%= link_to 'Edit', edit_author_path(author) %>
+                  <%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div> 
 
-  <tbody>
-    <% @authors.each do |author| %>
-      <tr>
-        <td><%= author.name %></td>
-        <td><%= author.birth_date %></td>
-        <td><%= author.email %></td>
-        <td><%= author.website %></td>
-        <td>
-          <% author.books.each do |book| %>
-            <%= book.title %> 
-          <% end %>
-        </td>
-        <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Author', new_author_path %>
+</div>   

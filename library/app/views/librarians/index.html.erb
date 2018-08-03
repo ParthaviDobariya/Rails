@@ -1,39 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="main">  
+  
+  <% if librarian_signed_in? %>
+    Logged in as <strong><%= current_librarian.email %></strong>.
+  <%end %>
 
-<% if librarian_signed_in? %>
-  Logged in as <strong><%= current_librarian.email %></strong>.
-  <%= link_to 'Edit profile', edit_librarian_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_librarian_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_librarian_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_librarian_session_path, :class => 'navbar-link'  %>
-<% end %>
-<h1>Librarians</h1>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li id="main_title">Librarians</li>
+      </ul>
+      <ul class="nav navbar-nav right">
+        <li id="new_link"><%= link_to 'Add New Librarian', new_librarian_path, class: " new_link" %></li>
+      </ul>
+    </div>
+  </nav>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Mobile no</th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="container"> 
+    <div class="row">
+      <% @librarians.each do |librarian| %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card ">
+            <h3 class="card-header"><%= librarian.name %></h3>
+            <div class="card-body">
+              <div class="form-group row">
+                <div class="col-5">
+                  Mobile 
+                </div>
+                <div class="col-7">
+                  <%= librarian.mobile_no %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-5">
+                  Email 
+                </div>
+                <div class="col-7">
+                  <%= librarian.email %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-8"> 
+                  <%= link_to 'Show', librarian %>
+                  <%= link_to 'Edit', edit_librarian_registration_path %>
+                  <%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </div>
+              
+            </div>
+          </div>    
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-  <tbody>
-    <% @librarians.each do |librarian| %>
-      <tr>
-        <td><%= librarian.name %></td>
-        <td><%= librarian.mobile_no %></td>
-        <td><%= librarian.address %></td>
-        <td><%= link_to 'Show', librarian %></td>
-        <td><%= link_to 'Edit', edit_librarian_registration_path %></td>
-        <td><%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Librarian', new_librarian_path %>
+</div>

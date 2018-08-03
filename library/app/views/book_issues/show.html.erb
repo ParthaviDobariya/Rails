@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="main">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @book_issue.user.name %>
-</p>
+	<p>
+	  <strong>User:</strong>
+	  <%= @book_issue.user.name %>
+	</p>
 
-<p>
-  <strong>Book:</strong>
-  <%= @book_issue.book.title %>
-</p>
+	<p>
+	  <strong>Book:</strong>
+	  <%= @book_issue.book.title %>
+	</p>
 
-<p>
-  <strong>Issue date:</strong>
-  <%= @book_issue.issue_date %>
-</p>
+	<p>
+	  <strong>Issue date:</strong>
+	  <%= @book_issue.issue_date %>
+	</p>
 
-<p>
-  <strong>Return date:</strong>
-  <%= @book_issue.return_date %>
-</p>
+	<p>
+	  <strong>Return date:</strong>
+	  <%= @book_issue.return_date %>
+	</p>
 
-<%= link_to 'Edit', edit_book_issue_path(@book_issue) %> |
-<%= link_to 'Back', book_issues_path %>
+	<%= link_to 'Edit', edit_book_issue_path(@book_issue) %> |
+	<%= link_to 'Back', book_issues_path %>
+</div>

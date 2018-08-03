@@ -1,0 +1,93 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+/*reset password*/
+.password {
+    padding-top: 50px;
+}
+
+.link {
+    padding-left: 150px;
+}
+
+/*home page table*/
+.table {
+    color: black;
+    margin-top: 50px;
+}
+
+/*search button home page*/
+.form-row {
+    margin-top: 180px;
+}
+
+.form-row .field {
+    display: inline-block;
+}
+
+#main_title {
+    font-size: 40px;
+    color: "black";
+}
+
+/*link for add new*/
+ul .new_link {
+    font-size: 20px;
+    color: black;
+}
+
+.title {
+    font-size: 30px;
+    color: #ffffff;
+    margin-left: 30px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+footer {
+    margin-left: 200px;
+    height: 25px;
+}
+
+@media (max-width: 768px) {
+    .sidenav {
+        width: 150px;
+    }
+    .main {
+        margin-left: 150px;
+    }
+    footer {
+        margin-left: 150px;
+        height: 30px; 
+        font-size: 12px;
+    }
+}

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
+  root "home_pages#index"
+  resources :home_pages
   devise_for :librarians
-  devise_scope :librarian do
-    root to: "devise/sessions#new"
-  end
   resources :book_issues
   resources :books
   resources :publications

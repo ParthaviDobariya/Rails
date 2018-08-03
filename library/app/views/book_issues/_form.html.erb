@@ -4,39 +4,61 @@
       <h2><%= pluralize(book_issue.errors.count, "error") %> prohibited this book_issue from being saved:</h2>
 
       <ul>
-      <% book_issue.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% book_issue.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :book_id %>
-    <%= form.select("book_id", Book.all.collect{ |book| [book.title, book.id]}) %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <div class="field form-group row">
+              <%= form.label :book_id, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.select("book_id", Book.all.collect{ |book| [book.title, book.id]}, {}, {class: "form-control"}) %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :user_id, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.select("user_id", User.all.collect{ |user| [user.name, user.id]}, {}, {class: "form-control"}) %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :librarian_id, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.select("librarian_id", Librarian.all.collect{ |librarian| [librarian.name, librarian.id]}, {}, {class: "form-control"}) %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :issue_date, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.date_select :issue_date, start_year:Time.now.year, end_year:Time.now.year, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :return_date, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.date_select :return_date, start_year:Time.now.year, end_year:Time.now.year, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="actions">
+              <%= form.submit %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.select("user_id", User.all.collect{ |user| [user.name, user.id]}) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :librarian_id %>
-    <%= form.select("librarian_id", Librarian.all.collect{ |librarian| [librarian.name, librarian.id]}) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :issue_date %>
-    <%= form.date_select :issue_date, start_year:Time.now.year %>
-  </div>
-
-  <div class="field">
-    <%= form.label :return_date %>
-    <%= form.date_select :return_date, start_year:Time.now.year %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

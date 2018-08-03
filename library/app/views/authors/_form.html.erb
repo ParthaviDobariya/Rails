@@ -4,34 +4,55 @@
       <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
 
       <ul>
-      <% author.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% author.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="field form-group row">
+              <%= form.label :name, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.text_field :name, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :birth_date, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.date_select :birth_date, start_year: Time.now.year-18, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :email, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="field form-group row">
+              <%= form.label :website, class: "col-6 col-form-label" %>
+              <div class="col-6">
+                <%= form.text_field :website, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="actions">
+              <%= form.submit %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :birth_date %>
-    <%= form.date_select :birth_date, start_year: Time.now.year-18 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
