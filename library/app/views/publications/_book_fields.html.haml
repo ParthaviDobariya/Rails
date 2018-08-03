@@ -1,0 +1,18 @@
+.nested-fields
+  .field.form-group.row
+    = f.label :isbn_no, class: "col-6 col-form-label"
+    .col-6
+      = f.text_field :isbn_no, class: "form-control"
+  .field.form-group.row
+    = f.label :title, class: "col-6 col-form-label"
+    .col-6
+      = f.text_field :title, class: "form-control"
+  .field.form-group.row
+    = f.label :publish_date, class: "col-6 col-form-label"
+    .col-6
+      = f.date_select :publish_date, start_year: Time.now.year-18, end_year: Time.now.year, class: "form-control"
+  .field.form-group.row
+    = f.label :pages, class: "col-6 col-form-label"
+    .col-6
+      = f.number_field :pages, class: "form-control"
+  = link_to_remove_association "remove book ", f

@@ -1,0 +1,31 @@
+.main
+  %p#notice= notice
+  %p
+    - if @book.image.attached?
+      = image_tag @book.image.variant(resize: "300x300")
+  %p
+    %strong Isbn no:
+    = @book.isbn_no
+  %p
+    %strong Title:
+    = @book.title
+  %p
+    %strong Number of books:
+    = @book.number_of_books
+  %p
+    %strong Publish date:
+    = @book.publish_date
+  %p
+    %strong Pages:
+    = @book.pages
+  %p
+    %strong Author:
+    - @book.authors.each do |author|
+      = author.name
+  %p
+    %strong Category:
+    - @book.categories.each do |category|
+      = category.name
+  = link_to 'Edit', edit_book_path(@book)
+  |
+  \#{link_to 'Back', books_path}

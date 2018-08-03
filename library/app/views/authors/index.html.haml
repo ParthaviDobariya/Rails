@@ -1,0 +1,40 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Authors
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Author', new_author_path, class: " new_link"
+  .container
+    .row
+      - @authors.each do |author|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= author.name
+            .card-body
+              .form-group.row
+                .col-4
+                  Birth Date
+                .col-8
+                  = author.birth_date
+              .form-group.row
+                .col-4
+                  Email
+                .col-8
+                  = author.email
+              .form-group.row
+                .col-4
+                  Website
+                .col-8
+                  = author.website
+              .form-group.row
+                .col-4
+                  Books
+                .col-8
+                  - author.books.each do |book|
+                    = book.title
+              .form-group.row
+                .col-8
+                  = link_to 'Show', author
+                  = link_to 'Edit', edit_author_path(author)
+                  = link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }

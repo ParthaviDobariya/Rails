@@ -1,0 +1,17 @@
+.main
+  %p#notice= notice
+  %p
+    %strong User:
+    = @book_issue.user.name
+  %p
+    %strong Book:
+    = @book_issue.book.title
+  %p
+    %strong Issue date:
+    = @book_issue.issue_date
+  %p
+    %strong Return date:
+    = @book_issue.return_date
+  = link_to 'Edit', edit_book_issue_path(@book_issue)
+  |
+  \#{link_to 'Back', book_issues_path}

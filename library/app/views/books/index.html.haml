@@ -1,0 +1,65 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Books
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Book', new_book_path, class: " new_link"
+  .container
+    .row
+      - @books.each do |book|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= book.title
+            .card-body
+              .row
+                - if book.image.attached?
+                  = image_tag(book.image.variant(resize: "300x500"), class: "img-fluid")
+              .form-group.row
+                .col-6
+                  ISBN No.
+                .col-6
+                  = book.isbn_no
+              .form-group.row
+                .col-6
+                  Publish Date
+                .col-6
+                  = book.publish_date
+              .form-group.row
+                .col-6
+                  Publication
+                .col-6
+                  = book.publication.name
+              .form-group.row
+                .col-6
+                  Authors
+                .col-6
+                  - book.authors.each do |author|
+                    = author.name
+              .form-group.row
+                .col-6
+                  Category
+                .col-6
+                  - book.categories.each do |category|
+                    = category.name
+              .form-group.row
+                .col-6
+                  Number of Pages
+                .col-6
+                  = book.pages
+              .form-group.row
+                .col-6
+                  Number of Available Books
+                .col-6
+                  = book.number_of_books
+              .form-group.row
+                .col-6
+                  Users
+                .col-6
+                  - book.users.each do |user|
+                    = user.name
+              .form-group.row
+                .col-8
+                  = link_to 'Show', book
+                  = link_to 'Edit', edit_book_path(book)
+                  = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }

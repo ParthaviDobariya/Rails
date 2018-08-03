@@ -1,0 +1,40 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Publication
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Publication', new_publication_path, class: " new_link"
+  .container
+    .row
+      - @publications.each do |publication|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= publication.name
+            .card-body
+              .form-group.row
+                .col-5
+                  Name
+                .col-7
+                  = publication.name
+              .form-group.row
+                .col-5
+                  Address
+                .col-7
+                  = publication.address
+              .form-group.row
+                .col-5
+                  Website
+                .col-7
+                  = publication.website
+              .form-group.row
+                .col-5
+                  Books
+                .col-7
+                  - publication.books.each do |book|
+                    = book.title
+              .form-group.row
+                .col-8
+                  = link_to 'Show', publication
+                  = link_to 'Edit', edit_publication_path(publication)
+                  = link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' }

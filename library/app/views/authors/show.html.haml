@@ -1,0 +1,17 @@
+.main
+  %p#notice= notice
+  %p
+    %strong Name:
+    = @author.name
+  %p
+    %strong Birth date:
+    = @author.birth_date
+  %p
+    %strong Email:
+    = @author.email
+  %p
+    %strong Website:
+    = @author.website
+  = link_to 'Edit', edit_author_path(@author)
+  |
+  \#{link_to 'Back', authors_path}

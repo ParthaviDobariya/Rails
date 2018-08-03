@@ -1,0 +1,33 @@
+.main
+  - if librarian_signed_in?
+    Logged in as
+    = succeed "." do
+      %strong= current_librarian.email
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Librarians
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Librarian', new_librarian_path, class: " new_link"
+  .container
+    .row
+      - @librarians.each do |librarian|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= librarian.name
+            .card-body
+              .form-group.row
+                .col-5
+                  Mobile
+                .col-7
+                  = librarian.mobile_no
+              .form-group.row
+                .col-5
+                  Email
+                .col-7
+                  = librarian.email
+              .form-group.row
+                .col-8
+                  = link_to 'Show', librarian
+                  = link_to 'Edit', edit_librarian_registration_path
+                  = link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' }

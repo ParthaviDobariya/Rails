@@ -1,0 +1,18 @@
+.main
+  %p#notice= notice
+  %p
+    %strong Name:
+    = @publication.name
+  %p
+    %strong Address:
+    = @publication.address
+  %p
+    %strong Website:
+    = @publication.website
+  %p
+    %strong Books:
+    - @publication.books.each do |book|
+      = book.title
+  = link_to 'Edit', edit_publication_path(@publication)
+  |
+  \#{link_to 'Back', publications_path}

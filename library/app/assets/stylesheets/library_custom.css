@@ -4,6 +4,14 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 
+body {
+    background-color: #edefea;
+}
+
+.card-header {
+    background-color: #111;
+    color: white;
+}
 /*reset password*/
 .password {
     padding-top: 50px;

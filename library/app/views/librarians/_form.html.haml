@@ -1,0 +1,28 @@
+= form_with(model: librarian, local: true) do |form|
+  - if librarian.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(librarian.errors.count, "error")
+        prohibited this librarian from being saved:
+      %ul
+        - librarian.errors.full_messages.each do |message|
+          %li= message
+  .container
+    .row
+      .col-sm-9.col-md-7.col-lg-7.mx-auto
+        .card
+          .card-body
+            .field.form-group.row
+              = form.label :name, class: "col-2 col-form-label"
+              .col-10
+                = form.text_field :name, class: "form-control"
+            .field.form-group.row
+              = form.label :mobile_no, class: "col-2 col-form-label"
+              .col-10
+                = form.text_field :mobile_no, class: "form-control"
+            .field.form-group.row
+              = form.label :address, class: "col-2 col-form-label"
+              .col-10
+                = form.text_field :address, class: "form-control"
+            .actions
+              = form.submit

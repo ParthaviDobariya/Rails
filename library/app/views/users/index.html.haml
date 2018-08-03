@@ -1,0 +1,40 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Users
+      %ul.nav.navbar-nav.right
+        %li= link_to 'Add New User', new_user_path, class: " new_link"
+  .container
+    .row
+      - @users.each do |user|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= user.name
+            .card-body
+              .form-group.row
+                .col-5
+                  Mobile
+                .col-7
+                  = user.mobile_no
+              .form-group.row
+                .col-5
+                  Email
+                .col-7
+                  = user.email
+              .form-group.row
+                .col-5
+                  Address
+                .col-7
+                  = user.address
+              .form-group.row
+                .col-5
+                  Books
+                .col-7
+                  - user.books.each do |book|
+                    = book.title
+              .form-group.row
+                .col-8
+                  = link_to 'Show', user
+                  = link_to 'Edit', edit_user_path(user)
+                  = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }

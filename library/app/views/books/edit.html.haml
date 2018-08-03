@@ -1,0 +1,11 @@
+.main
+  %h1 Editing Book
+  .container
+    .row
+      .col-sm-9.col-md-7.col-lg-6.mx-auto
+        .card
+          .card-body
+            = render 'form', book: @book
+            = link_to 'Show', @book
+            |
+            \#{link_to 'Back', books_path}

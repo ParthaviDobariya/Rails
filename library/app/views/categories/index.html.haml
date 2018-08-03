@@ -1,0 +1,19 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Book Category
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Category', new_category_path, class: " new_link"
+  .container
+    .row
+      - @categories.each do |category|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= category.name
+            .card-body
+              .form-group.row
+                .col-8
+                  = link_to 'Show', category
+                  = link_to 'Edit', edit_category_path(category)
+                  = link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }

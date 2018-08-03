@@ -1,0 +1,14 @@
+.main
+  %p#notice= notice
+  %p
+    %strong Name:
+    = @librarian.name
+  %p
+    %strong Mobile no:
+    = @librarian.mobile_no
+  %p
+    %strong Address:
+    = @librarian.address
+  = link_to 'Edit', edit_librarian_path(@librarian)
+  |
+  \#{link_to 'Back', librarians_path}

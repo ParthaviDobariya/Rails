@@ -1,0 +1,34 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Book Issue
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Book Issue', new_book_issue_path, class: " new_link"
+  .container
+    .row
+      - @book_issues.each do |book_issue|
+        .col-lg-4.col-md-6.mb-4
+          .card
+            %h3.card-header= book_issue.book.title
+            .card-body
+              .form-group.row
+                .col-5
+                  User
+                .col-7
+                  = book_issue.user.name
+              .form-group.row
+                .col-5
+                  Issue Date
+                .col-7
+                  = book_issue.issue_date
+              .form-group.row
+                .col-5
+                  Return Date
+                .col-7
+                  = book_issue.return_date
+              .form-group.row
+                .col-8
+                  = link_to 'Show', book_issue
+                  = link_to 'Edit', edit_book_issue_path(book_issue)
+                  = link_to 'Destroy', book_issue, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Library
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    / Masthead
+    %header.masthead.text-white.text-center.main
+      .container
+        .row
+          .col-sm-9.col-md-7.col-lg-5.mx-auto
+            .form-row
+              = form_tag(home_pages_path, method: :get) do
+                .field
+                  = text_field_tag :title, params[:title], placeholder: "Search Book", class: "form-control form-control-lg"
+                .field
+                  = submit_tag "Search", name: "selected", class: "btn btn-lg btn-primary btn-block text-uppercase"
+        - if params[:selected]
+          .col-xs-9.col-sm-7.col-lg-9.mx-auto
+            %table.table.table-responsive
+              %tr
+                %th Title
+                %th ISBN No.
+                %th Publish Date
+                %th Publication
+                %th Pages
+                %th Authors
+                %th Catgories
+              - @books.each do |book|
+                %tr
+                  %td= book.title
+                  %td= book.isbn_no
+                  %td= book.publish_date
+                  %td= book.publication.name
+                  %td= book.pages
+                  %td
+                    - book.authors.each do |author|
+                      = author.name
+                  %td
+                    - book.categories.each do |category|
+                      = category.name
