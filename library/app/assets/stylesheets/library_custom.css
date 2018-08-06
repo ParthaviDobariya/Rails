@@ -113,20 +113,48 @@ footer {
 }
 
 /*pagination*/
-.pagination a {
+.pagination {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.pagination ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: 0 0;
+}
+
+.pagination li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination li a {
     color: black;
-    float: left;
-    padding: 8px 16px;
     text-decoration: none;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 5px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 40px;
+    margin-top: 10px;
+}
+
+.pagination li a:hover {
+    background-color: #111;
+    color: gray;
 }
 
 .pagination .page-item.active .page-link {
     background-color: #111;
     color: white;
     border: none;
-}
-
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-    color: black;
 }
