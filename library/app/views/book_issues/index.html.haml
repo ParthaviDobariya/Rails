@@ -4,7 +4,7 @@
       %ul.nav.navbar-nav
         %li#main_title Book Issue
       %ul.nav.navbar-nav.right
-        %li#new_link= link_to 'Book Issue', new_book_issue_path, class: " new_link"
+        %li#new_link= link_to 'Issue Book', new_book_issue_path, class: " new_link"
   .container
     .row
       - @book_issues.each do |book_issue|
@@ -27,8 +27,9 @@
                   Return Date
                 .col-7
                   = book_issue.return_date
-              .form-group.row
-                .col-8
-                  = link_to 'Show', book_issue
-                  = link_to 'Edit', edit_book_issue_path(book_issue)
-                  = link_to 'Destroy', book_issue, method: :delete, data: { confirm: 'Are you sure?' }
+            .card-footer
+              = link_to 'Show', book_issue
+              = link_to 'Edit', edit_book_issue_path(book_issue)
+              = link_to 'Destroy', book_issue, method: :delete, data: { confirm: 'Are you sure?' }
+    .pagination.justify-content-center
+      = paginate @book_issues

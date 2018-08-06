@@ -4,7 +4,7 @@ class BookIssuesController < ApplicationController
   # GET /book_issues
   # GET /book_issues.json
   def index
-    @book_issues = BookIssue.all
+    @book_issues = BookIssue.order(:issue_date).page(params[:page]).per(3)
   end
 
   # GET /book_issues/1

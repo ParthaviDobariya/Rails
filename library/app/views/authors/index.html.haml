@@ -33,8 +33,9 @@
                 .col-8
                   - author.books.each do |book|
                     = book.title
-              .form-group.row
-                .col-8
-                  = link_to 'Show', author
-                  = link_to 'Edit', edit_author_path(author)
-                  = link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }
+            .card-footer
+              = link_to 'Show', author
+              = link_to 'Edit', edit_author_path(author)
+              = link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }
+    .pagination.justify-content-center
+      = paginate @authors

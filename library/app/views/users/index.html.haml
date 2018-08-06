@@ -33,8 +33,9 @@
                 .col-7
                   - user.books.each do |book|
                     = book.title
-              .form-group.row
-                .col-8
-                  = link_to 'Show', user
-                  = link_to 'Edit', edit_user_path(user)
-                  = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+            .card-footer
+              = link_to 'Show', user
+              = link_to 'Edit', edit_user_path(user)
+              = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+    .pagination.justify-content-center
+      = paginate @users

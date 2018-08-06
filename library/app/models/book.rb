@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
 
 	validates :isbn_no,         presence: true, length: { is: 13 },     uniqueness: true
-	validates :number_of_books, presence: true, length: { maximum: 4 }, allow_blank: true
+	validates :number_of_books, presence: true, length: { maximum: 4 }
 	validates :pages, 			presence: true, length: { maximum: 5 }
 	validates :title, 			presence: true
 	validates :publish_date, 	presence: true

@@ -26,8 +26,7 @@
                   Email
                 .col-7
                   = librarian.email
-              .form-group.row
-                .col-8
-                  = link_to 'Show', librarian
-                  = link_to 'Edit', edit_librarian_registration_path
-                  = link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' }
+            .card-footer
+              = link_to 'Show', librarian
+              = link_to 'Edit', edit_librarian_registration_path
+              = link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' }

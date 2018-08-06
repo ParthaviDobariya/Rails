@@ -18,7 +18,7 @@
                 .field
                   = text_field_tag :title, params[:title], placeholder: "Search Book", class: "form-control form-control-lg"
                 .field
-                  = submit_tag "Search", name: "selected", class: "btn btn-lg btn-primary btn-block text-uppercase"
+                  = submit_tag "Search", name: "selected", class: "btn btn-lg btn-block text-uppercase"
         - if params[:selected]
           .col-xs-9.col-sm-7.col-lg-9.mx-auto
             %table.table.table-responsive
@@ -43,3 +43,5 @@
                   %td
                     - book.categories.each do |category|
                       = category.name
+          .pagination.justify-content-center
+            = paginate @books
