@@ -8,6 +8,10 @@ body {
     background-color: #edefea;
 }
 
+h2 {
+    margin-top: 150px;  
+}
+
 .notice {
     margin-left: 200px;
 }
@@ -37,12 +41,12 @@ body {
 }
 
 /*search button home page*/
-.form-row {
-    margin-top: 180px;
+.form {
+    margin-top: 100px;
 }
 
-.form-row .field {
-    display: inline-block;
+.form .form-control {
+    width: 150px;
 }
 
 #main_title {
@@ -109,6 +113,10 @@ footer {
         margin-left: 150px;
         height: 30px; 
         font-size: 14px;
+    }
+    .form {
+        margin-top: 10px;
+        margin-left: 70px;
     }
 }
 

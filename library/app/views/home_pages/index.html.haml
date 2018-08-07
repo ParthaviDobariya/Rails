@@ -9,39 +9,42 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     / Masthead
-    %header.masthead.text-white.text-center.main
+    %header.main.text-center
       .container
-        .row
-          .col-sm-9.col-md-7.col-lg-5.mx-auto
-            .form-row
-              = form_tag(home_pages_path, method: :get) do
-                .field
-                  = text_field_tag :title, params[:title], placeholder: "Search Book", class: "form-control form-control-lg"
-                .field
-                  = submit_tag "Search", name: "selected", class: "btn btn-lg btn-block text-uppercase"
+        .form-inline.form
+          = form_with(url: home_pages_path, method: :get, local: true) do |f|
+            
+            = f.text_field :title, placeholder: "Search Book", class: "form-control"
+            = f.text_field :isbn_no, placeholder: "Search ISBN No", class: "form-control"
+            = f.select("year", (2000..Time.now.year).to_a, {prompt: "Select Year"}, {class: "form-control"})
+            = f.select("publication_id", Publication.all.collect{ |p| [p.name, p.id]}, {prompt: 'Select Publication'}, {class: "form-control"})
+            = f.text_field :author, placeholder: "Search Author", class: "form-control"
+            = f.select("category_id", Category.all.collect{ |c| [c.name, c.id]}, {prompt: 'Select Category'}, {class: "form-control"})
+            = f.submit "Search", name: "selected", class: "btn text-uppercase"
         - if params[:selected]
           .col-xs-9.col-sm-7.col-lg-9.mx-auto
-            %table.table.table-responsive
-              %tr
-                %th Title
-                %th ISBN No.
-                %th Publish Date
-                %th Publication
-                %th Pages
-                %th Authors
-                %th Catgories
-              - @books.each do |book|
+            - if @books.empty?
+              %h2= "No Record Found"
+            -else
+              %table.table.table-responsive
                 %tr
-                  %td= book.title
-                  %td= book.isbn_no
-                  %td= book.publish_date
-                  %td= book.publication.name
-                  %td= book.pages
-                  %td
-                    - book.authors.each do |author|
-                      = author.name
-                  %td
-                    - book.categories.each do |category|
-                      = category.name
+                  %th Title
+                  %th ISBN No.
+                  %th Publish Date
+                  %th Publication
+                  %th Authors
+                  %th Catgories
+                - @books.each do |book|
+                  %tr
+                    %td= book.title
+                    %td= book.isbn_no
+                    %td= book.publish_date
+                    %td= book.publication.name
+                    %td
+                      - book.authors.each do |author|
+                        = author.name
+                    %td
+                      - book.categories.each do |category|
+                        = category.name
           .pagination.justify-content-center
             = paginate @books
