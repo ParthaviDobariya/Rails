@@ -6,9 +6,7 @@
   %nav.navbar.navbar-default
     .container-fluid
       %ul.nav.navbar-nav
-        %li#main_title Librarians
-      %ul.nav.navbar-nav.right
-        %li#new_link= link_to 'Add New Librarian', new_librarian_path, class: " new_link"
+        %li#main_title Librarian
   .container
     .row
       - @librarians.each do |librarian|
