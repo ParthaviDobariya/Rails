@@ -21,14 +21,16 @@ Rails.application.routes.draw do
     put    '/forgot-password', to: 'devise/passwords#update',     as: :update_librarian_password
   end
 
-  resources :home_pages
-  resources :librarians
+  resources :home_pages, path: 'Library' do
+    get :index, on: :collection
+  end
+  resources :librarians, path: 'Admin'
   resources :book_issues
   resources :books
   resources :publications
   resources :categories
   resources :authors
-  resources :users
+  resources :users 
 
   match "/404", to: "application#record_not_found", via: :all
   match "/500", to: "application#internal_server_error", via: :all
