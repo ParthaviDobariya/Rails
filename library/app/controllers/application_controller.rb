@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     render file: File.join(Rails.root, 'public', '404.html')
   end
 
+  def internal_server_error
+    render file: File.join(Rails.root, 'public', '500.html')
+  end
+
   protected
 	  def configure_permitted_parameters
 	    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :mobile_no, :address])

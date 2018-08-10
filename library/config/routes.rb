@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "home_pages#index"
 
   devise_for :librarians, skip: [:sessions, :registrations, :passwords]
-  
+
   as :librarian do
     get    '/login',           to: 'devise/sessions#new',         as: :new_librarian_session
     post   '/login',           to: 'devise/sessions#create',      as: :librarian_session
@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   resources :users
 
   match "/404", to: "application#record_not_found", via: :all
+  match "/500", to: "application#internal_server_error", via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
