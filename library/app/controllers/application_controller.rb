@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   def record_not_found
-    render file: File.join(Rails.root, 'public', '404.html')
+    if librarian_signed_in?
+    	render file: File.join(Rails.root, 'public', '404.html') and return
+    elsif root_path
+    	render file: File.join(Rails.root, 'public', '404.html') and return
+    end
   end
 
   def internal_server_error
