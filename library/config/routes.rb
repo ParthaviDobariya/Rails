@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     get    '/forgot-password', to: 'devise/passwords#new',        as: :new_librarian_password
     post   '/forgot-password', to: 'devise/passwords#create',     as: :librarian_password
-    get    '/forgot-password', to: 'devise/passwords#edit',       as: :edit_librarian_password
+    get    '/edit_password',   to: 'devise/passwords#edit',       as: :edit_librarian_password
     put    '/forgot-password', to: 'devise/passwords#update',     as: :update_librarian_password
   end
 
