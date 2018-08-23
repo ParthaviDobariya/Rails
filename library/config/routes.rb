@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  
   root "home_pages#index"
-
   devise_for :librarians, skip: [:sessions, :registrations, :passwords]
-
   as :librarian do
     get    '/login',           to: 'devise/sessions#new',         as: :new_librarian_session
     post   '/login',           to: 'devise/sessions#create',      as: :librarian_session
@@ -21,9 +18,9 @@ Rails.application.routes.draw do
     put    '/forgot-password', to: 'devise/passwords#update',     as: :update_librarian_password
   end
 
-  resources :home_pages, path: 'Library' do
-    get :index, on: :collection
-  end
+  resources :home_pages, path: 'Library'
+  get      'select_author',    to: 'home_pages#select_author'
+  
   resources :librarians, path: 'Admin'
   resources :book_issues
   resources :books

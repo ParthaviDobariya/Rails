@@ -57,8 +57,8 @@
                   Users
                 .col-6
                   - book.users.each do |user|
-                    .col-6
-                      = user.name
+                    = user.name
+
             .card-footer
               = link_to 'Show', book
               = link_to 'Edit', edit_book_path(book)

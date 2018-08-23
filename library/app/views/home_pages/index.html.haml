@@ -1,50 +1,54 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Library
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
-    / Masthead
-    %header.main.text-center
-      .container
-        .form-inline.form
-          = form_with(url: home_pages_path, method: :get, local: true) do |f|
-            
-            = f.text_field :title, placeholder: "Search Book", class: "form-control", value: params[:title]
-            = f.text_field :isbn_no, placeholder: "Search ISBN No", class: "form-control", value: params[:isbn_no]
-            = f.select("year", (2000..Time.now.year).to_a, {include_blank: "Select Year", selected: @year}, {class: "form-control"})
-            = f.select("publication_id", Publication.all.collect{ |p| [p.name, p.id]}, {include_blank: 'Select Publication', selected: @publication_id}, {class: "form-control"})
-            = f.text_field :author, placeholder: "Search Author", class: "form-control", value: params[:author]
-            = f.select("category_id", Category.all.collect{ |c| [c.name, c.id]}, {include_blank: 'Select Category', selected: @category}, {class: "form-control"})
-            = f.submit "Search", name: "selected", class: "btn text-uppercase"
-        - if params[:selected]
-          .col-xs-9.col-sm-7.col-lg-9.mx-auto
-            - if @books.empty?
-              %h2= "No Record Found"
-            -else
-              %table.table.table-responsive
-                %tr
-                  %th Title
-                  %th ISBN No.
-                  %th Publish Date
-                  %th Publication
-                  %th Authors
-                  %th Catgories
-                - @books.each do |book|
-                  %tr
-                    %td= book.title
-                    %td= book.isbn_no
-                    %td= book.publish_date
-                    %td= book.publication.name
-                    %td
-                      - book.authors.each do |author|
-                        = author.name
-                    %td
-                      - book.categories.each do |category|
-                        = category.name
-          .pagination.justify-content-center
-            = paginate @books
+.main
+  .container
+    .form-inline.form
+      = form_with(url: home_pages_path, method: :get, local: true) do |f|
+        = f.select("publication_id", Publication.all.collect{|p| [p.name, p.id]}, {include_blank: 'Select Publication', selected: @publication_id}, {class: "form-control"})
+        = f.select("category_id", Category.all.collect{|c| [c.name, c.id]}, {include_blank: 'Select Category', selected: @category}, {class: "form-control"})
+        = f.select("year", (2000..Time.now.year).to_a, {include_blank: "Select Year", selected: @year}, {class: "form-control"})
+        = f.select("book_id", Book.all.collect{|b| [b.title, b.id]}, {include_blank: 'Select Book', selected: @book}, {class: "form-control dependent-dropdown", data: {url: "/select_author?book_id=", target: "author_id"}})
+        = f.select("author_id", Author.all.collect{|a| [a.name, a.id]}, {include_blank: 'Select Author', selected: @author}, {class: "form-control", id: "author_id"})
+        = f.text_field :isbn_no, placeholder: "Search ISBN No", class: "form-control", value: params[:isbn_no]
+        = f.submit "Search", name: "selected", class: "btn text-uppercase"
+    - if params[:selected]
+      .col-xs-9.col-sm-7.col-lg-9.mx-auto
+        - if @books.empty?
+          %h2= "No Record Found"
+        -else
+          %table.table.table-responsive
+            %tr
+              %th Title
+              %th ISBN No.
+              %th Publish Date
+              %th Publication
+              %th Authors
+              %th Catgories
+            - @books.each do |book|
+              %tr
+                %td= book.title
+                %td= book.isbn_no
+                %td= book.publish_date
+                %td= book.publication.name
+                %td
+                  - book.authors.each do |author|
+                    = author.name
+                %td
+                  - book.categories.each do |category|
+                    = category.name
+                %td
+                  = link_to "#newTag", data: { toggle: "modal" } do
+                    %i.fa.fa-plus
+                    Send Email
+                  #newTag.modal.fade{role: "dialog"}
+                    .modal-dialog
+                      .modal-content
+                        .modal-header
+                          %h4.modal-title 
+                            Enter Email Address
+                        = form_with(url: home_pages_path, method: :get, local: true) do |form|
+                          .modal-body
+                            = form.text_field :email, placeholder: "Enter Email", class: "form-control"
+                          .modal-footer
+                            .actions
+                              = form.submit "Submit", class: "btn btn-block", name: "select"
+      .pagination.justify-content-center
+        = paginate @books

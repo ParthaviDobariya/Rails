@@ -64,7 +64,8 @@ class BookIssuesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book_issue
-      @book_issue = BookIssue.find(params[:id])
+      @book_issue = BookIssue.find_by_id(params[:id])
+      redirect_to book_issues_path, notice: "Issued Book not found" if @book_issue.blank?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -64,7 +64,8 @@ class AuthorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_author
-      @author = Author.find(params[:id])
+      @author = Author.find_by_id(params[:id])
+      redirect_to authors_path, notice: "Author not found" if @author.blank?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

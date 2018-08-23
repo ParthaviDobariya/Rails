@@ -8,28 +8,34 @@
         - book.errors.full_messages.each do |message|
           %li= message
   .field.form-group.row
-    = form.label :isbn_no, class: "col-6 col-form-label"
-    .col-6
+    .col-lg-6
+      = form.label :isbn_no
+    .col
       = form.text_field :isbn_no, class: "form-control"
   .field.form-group.row
-    = form.label :title, class: "col-6 col-form-label"
-    .col-6
+    .col-lg-6
+      = form.label :title
+    .col
       = form.text_field :title, class: "form-control"
   .field.form-group.row
-    = form.label :number_of_books, class: "col-6 col-form-label"
-    .col-6
+    .col-lg-6
+      = form.label :number_of_books
+    .col
       = form.number_field :number_of_books, class: "form-control"
   .field.form-group.row
-    = form.label :publish_date, class: "col-6 col-form-label"
-    .col-6
-      = form.date_select :publish_date, start_year: Time.now.year-18, end_year: Time.now.year, class: "form-control"
+    .col-lg-6
+      = form.label :publish_date
+    .col
+      = form.text_field :publish_date, class: "form-control", id: "date", autocomplete: :off
   .field.form-group.row
-    = form.label :pages, class: "col-6 col-form-label"
-    .col-6
+    .col-lg-6
+      = form.label :pages
+    .col
       = form.number_field :pages, class: "form-control"
   .field.form-group.row
-    = form.label :publication_id, class: "col-6 col-form-label"
-    .col-6
+    .col-lg-6
+      = form.label :publication_id
+    .col
       = form.select("publication_id", Publication.all.collect{ |p| [p.name, p.id]}, {}, {class: "form-control"})
   .field
     = form.label :image
@@ -37,18 +43,18 @@
   %div
     %p
       %strong Authors :
-    #author
-      = form.fields_for :books_authors do |author|
-        = render 'books_author_fields', f: author
-      .links
-        = link_to_add_association 'add author', form, :books_authors
+      #author
+        = form.fields_for :books_authors do |author|
+          = render 'books_author_fields', f: author
+        .links
+          = link_to_add_association 'add author', form, :books_authors
   %div
     %p
       %strong Category :
-    #category
-      = form.fields_for :books_categories do |category|
-        = render 'books_category_fields', f: category
-      .links
-        = link_to_add_association 'add category', form, :books_categories
+      #category
+        = form.fields_for :books_categories do |category|
+          = render 'books_category_fields', f: category
+        .links
+          = link_to_add_association 'add category', form, :books_categories
   .actions
     = form.submit

@@ -13,24 +13,27 @@
         .card
           .card-body
             .field.form-group.row
-              = form.label :name, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :name
+              .col
                 = form.text_field :name, class: "form-control"
             .field.form-group.row
-              = form.label :address, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6  
+                = form.label :address
+              .col
                 = form.text_field :address, class: "form-control"
             .field.form-group.row
-              = form.label :website, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :website
+              .col
                 = form.text_field :website, class: "form-control"
             %div
               %p
                 %strong Books :
-              #book
-                = form.fields_for :books do |book|
-                  = render 'book_fields', f: book
-                .links
-                  = link_to_add_association 'add books', form, :books, partial: "book_fields"
+                #book
+                  = form.fields_for :books do |book|
+                    = render 'book_fields', f: book
+                  .links
+                    = link_to_add_association 'add books', form, :books, partial: "book_fields"
             .actions
               = form.submit

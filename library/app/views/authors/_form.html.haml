@@ -13,20 +13,24 @@
         .card
           .card-body
             .field.form-group.row
-              = form.label :name, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :name
+              .col
                 = form.text_field :name, class: "form-control"
             .field.form-group.row
-              = form.label :birth_date, class: "col-6 col-form-label"
-              .col-6
-                = form.date_select :birth_date, start_year: Time.now.year-18, class: "form-control"
+              .col-lg-6
+                = form.label :birth_date
+              .col.form-inline
+                = form.date_select :birth_date, {start_year: Time.now.year-18}, {class: "form-control"}
             .field.form-group.row
-              = form.label :email, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :email
+              .col
                 = form.text_field :email, class: "form-control"
             .field.form-group.row
-              = form.label :website, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :website
+              .col
                 = form.text_field :website, class: "form-control"
             .actions
               = form.submit

@@ -13,24 +13,29 @@
         .card
           .card-body
             .field.form-group.row
-              = form.label :book_id, class: "col-6 col-form-label"
-              .col-6
-                = form.select("book_id", Book.all.collect{ |book| [book.title, book.id]}, {}, {class: "form-control"})
+              .col-lg-6  
+                = form.label :book_id
+              .col
+                = form.select("book_id", Book.all.collect{ |book| [book.title, book.id]}, {include_blank: 'Select Book'}, {class: "form-control"})
             .field.form-group.row
-              = form.label :user_id, class: "col-6 col-form-label"
-              .col-6
-                = form.select("user_id", User.all.collect{ |user| [user.name, user.id]}, {}, {class: "form-control"})
+              .col-lg-6
+                = form.label :user_id
+              .col
+                = form.select("user_id", User.all.collect{ |user| [user.name, user.id]}, {include_blank: 'Select User'}, {class: "form-control"})
             .field.form-group.row
-              = form.label :librarian_id, class: "col-6 col-form-label"
-              .col-6
-                = form.select("librarian_id", Librarian.all.collect{ |librarian| [librarian.name, librarian.id]}, {}, {class: "form-control"})
+              .col-lg-6
+                = form.label :librarian_id
+              .col
+                = form.select("librarian_id", Librarian.all.collect{ |librarian| [librarian.name, librarian.id]}, {include_blank: 'Select Librarian'}, {class: "form-control"})
             .field.form-group.row
-              = form.label :issue_date, class: "col-6 col-form-label"
-              .col-6
-                = form.date_select :issue_date, start_year:Time.now.year, end_year:Time.now.year, class: "form-control"
+              .col-lg-6
+                = form.label :issue_date
+              .col.form-inline
+                = form.date_select :issue_date, {order: [:day, :month, :year], start_year:Time.now.year, end_year:Time.now.year}, {class: "form-control input-mini"}
             .field.form-group.row
-              = form.label :return_date, class: "col-6 col-form-label"
-              .col-6
-                = form.date_select :return_date, start_year:Time.now.year, end_year:Time.now.year, class: "form-control"
+              .col-lg-6
+                = form.label :return_date
+              .col.form-inline
+                = form.date_select :return_date, {order: [:day, :month, :year], start_year:Time.now.year, end_year:Time.now.year}, {class: "form-control input-mini"}
             .actions
               = form.submit

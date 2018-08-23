@@ -13,8 +13,9 @@
         .card
           .card-body
             .field.form-group.row
-              = form.label :name, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :name
+              .col
                 = form.text_field :name, class: "form-control"
             .actions
               = form.submit

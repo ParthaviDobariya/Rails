@@ -64,7 +64,8 @@ class PublicationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_publication
-      @publication = Publication.find(params[:id])
+      @publication = Publication.find_by_id(params[:id])
+      redirect_to publications_path, notice: "Publication not found" if @publication.blank?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

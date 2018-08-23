@@ -13,20 +13,24 @@
         .card
           .card-body
             .field.form-group.row
-              = form.label :name, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :name
+              .col
                 = form.text_field :name, class: "form-control"
             .field.form-group.row
-              = form.label :mobile_no, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :mobile_no
+              .col
                 = form.text_field :mobile_no, class: "form-control"
             .field.form-group.row
-              = form.label :email, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :email
+              .col
                 = form.text_field :email, class: "form-control"
             .field.form-group.row
-              = form.label :address, class: "col-6 col-form-label"
-              .col-6
+              .col-lg-6
+                = form.label :address
+              .col
                 = form.text_field :address, class: "form-control"
             .actions
               = form.submit
