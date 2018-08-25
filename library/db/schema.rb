@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_122624) do
+ActiveRecord::Schema.define(version: 2018_08_24_103956) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -85,6 +85,15 @@ ActiveRecord::Schema.define(version: 2018_08_01_122624) do
     t.index ["category_id"], name: "index_books_categories_on_category_id"
   end
 
+  create_table "books_shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "shop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_books_shops_on_book_id"
+    t.index ["shop_id"], name: "index_books_shops_on_shop_id"
+  end
+
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -119,6 +128,15 @@ ActiveRecord::Schema.define(version: 2018_08_01_122624) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "mobile_no", limit: 15
@@ -136,4 +154,6 @@ ActiveRecord::Schema.define(version: 2018_08_01_122624) do
   add_foreign_key "books_authors", "books"
   add_foreign_key "books_categories", "books"
   add_foreign_key "books_categories", "categories"
+  add_foreign_key "books_shops", "books"
+  add_foreign_key "books_shops", "shops"
 end

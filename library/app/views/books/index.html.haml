@@ -5,7 +5,7 @@
         %li#main_title Books
       %ul.nav.navbar-nav.right
         %li#new_link= link_to 'Add New Book', new_book_path, class: " new_link"
-  .container
+  .container   
     .row
       - @books.each do |book|
         .col-lg-4.col-md-6.mb-4
@@ -52,6 +52,12 @@
                   Number of Available Books
                 .col-6
                   = book.number_of_books
+              .form-group.row
+                .col-6
+                  Shops
+                .col-6
+                  - book.shops.each do |shop|
+                    = shop.name
               .form-group.row
                 .col-6
                   Users

@@ -1,0 +1,35 @@
+= form_for @shop do |f|
+  - if @shop.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@shop.errors.count, "error")} prohibited this shop from being saved:"
+      %ul
+        - @shop.errors.full_messages.each do |message|
+          %li= message
+
+  .container
+    .row
+      .col-sm-9.col-md-7.col-lg-8.mx-auto
+        .card
+          .card-body
+            .field.form-group.row
+              .col-lg-6
+                = f.label :name
+              .col
+                = f.text_field :name, class: "form-control"
+            .field.form-group.row
+              .col-lg-6        
+                = f.label :address
+              .col
+                = f.text_field :address, class: "form-control"
+            .field.form-group.row
+              .col-lg-6
+                = f.label :latitude
+              .col  
+                = f.text_field :latitude, class: "form-control"
+            .field.form-group.row
+              .col-lg-6
+                = f.label :longitude
+              .col
+                = f.text_field :longitude, class: "form-control"
+            .actions
+              = f.submit

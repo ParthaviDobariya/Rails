@@ -1,0 +1,21 @@
+.main
+  %p#notice= notice
+
+  %p
+    %b Name:
+    = @shop.name
+  %p
+    %b Address:
+    = @shop.address
+  %p
+    %b Latitude:
+    = @shop.latitude
+  %p
+    %b Longitude:
+    = @shop.longitude
+  / %p
+  /   = image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@shop.latitude},#{@shop.longitude}&zoom=13&size=640x400&key=AIzaSyAiJNfed7HBLMu23iVILURSuQ7Sw15aO4s",class: 'img-fluid img-rounded', alt: "#{@shop.name} on the map" 
+
+  = link_to 'Edit', edit_shop_path(@shop)
+  \|
+  = link_to 'Back', shops_path

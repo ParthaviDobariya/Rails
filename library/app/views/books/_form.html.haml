@@ -56,5 +56,13 @@
           = render 'books_category_fields', f: category
         .links
           = link_to_add_association 'add category', form, :books_categories
+  %div
+    %p
+      %strong Shops :
+      #shop
+        = form.fields_for :books_shops do |shop|
+          = render 'books_shop_fields', f: shop
+        .links
+          = link_to_add_association 'add shop', form, :books_shops
   .actions
     = form.submit

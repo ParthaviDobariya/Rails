@@ -1,0 +1,98 @@
+.main
+  %nav.navbar.navbar-default
+    .container-fluid
+      %ul.nav.navbar-nav
+        %li#main_title Shops
+      %ul.nav.nav-tabs
+        %li.nav-item
+          %a.nav-link.new_link{"data-toggle": "tab", href: "#shop"} Shop
+        %li.nav-item
+          %a.nav-link.new_link{"data-toggle": "tab", href: "#map"} Map
+      %ul.nav.navbar-nav.right
+        %li#new_link= link_to 'Add New Shop', new_shop_path, class: " new_link"
+  .container.tab-content
+    #shop.container.tab-pane
+      .row
+        - @shops.each do |shop|
+          .col-lg-4.col-md-6.mb-4
+            .card
+              %h3.card-header= shop.name
+              .card-body
+                .form-group.row
+                  .col-4
+                    Address
+                  .col-8
+                    = shop.address
+                .form-group.row
+                  .col-4
+                    Latitude
+                  .col-8
+                    = shop.latitude
+                .form-group.row
+                  .col-4
+                    Longitude
+                  .col-8
+                    = shop.longitude
+              .card-footer
+                = link_to 'Show', shop
+                = link_to 'Edit', edit_shop_path(shop)
+                = link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' }
+      .pagination.justify-content-center
+        = paginate @shops
+    #map.container.tab-pane  
+      #map_wrapper
+        #map_canvas.mapping
+          :javascript
+            function initialize() {
+              var map;
+              var shop = [];
+              var bounds = new google.maps.LatLngBounds();
+              var mapOptions = {
+                  mapTypeId: 'roadmap'
+              };
+                              
+              // Display a map on the page
+              map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+              map.setTilt(45);
+                  
+              // Multiple Markers
+              var markers = #{raw @address.to_json}                      
+              var details = #{raw @detail.to_json}    
+              // Display multiple markers on a map
+              var infoWindow = new google.maps.InfoWindow(), marker, i;
+              
+              // custom iarker
+              //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+              // Loop through our array of markers & place each one on the map  
+              for( i = 0; i < markers.length; i++ ) 
+              {
+                  shop[i] = '<div class="info_content">' + 
+                            '<h5>' + details[i][0] + '</h5>'+ 
+                            '<p>'  + details[i][1] + '</p>' + '</div>';
+                  var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
+                  bounds.extend(position);
+                  marker = new google.maps.Marker({
+                      position: position,
+                      map: map,
+                      icon: '/assets/icon.png' 
+                  });
+                  
+                  // Allow each marker to have an info window    
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                      return function() {
+                          infoWindow.setContent(shop[i]);
+                          infoWindow.open(map, marker);
+                      }
+                  })(marker, i));
+
+                  // Automatically center the map fitting all markers on the screen
+                  map.fitBounds(bounds);
+              }
+
+              // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+              var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                  this.setZoom(7);
+                  google.maps.event.removeListener(boundsListener);
+              });
+            }
+%script{src: "//maps.googleapis.com/maps/api/js?key=AIzaSyAiJNfed7HBLMu23iVILURSuQ7Sw15aO4s&callback=initialize"}

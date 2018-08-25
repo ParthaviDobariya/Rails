@@ -1,0 +1,6 @@
+.nested-fields
+  .field.form-group.row
+    = f.label :name, class: "col-lg-5"
+    .col-lg-4
+      = f.select("shop_id", Shop.all.collect{ |s| [s.name, s.id]}, {}, {class: "form-control"})
+    = link_to_remove_association "remove author", f

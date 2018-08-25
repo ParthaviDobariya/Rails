@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function(){
+$('document').ready(function(){
 	$('#date').datepicker({
   	format: "dd/mm/yyyy",
   	todayHighlight: true,
@@ -29,4 +29,10 @@ document.addEventListener("turbolinks:load", function(){
       });
     }
 	});
+
+  $(".autocomplete").each(function() {
+    $(this).autocomplete({
+      source: $(this).attr("data-url")
+    })
+  });
 });

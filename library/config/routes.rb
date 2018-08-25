@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   end
 
   resources :home_pages, path: 'Library'
-  get      'select_author',    to: 'home_pages#select_author'
-  
+  get      '/select_author',    to: 'home_pages#select_author'
+  get      '/references',       to: 'home_pages#references'
   resources :librarians, path: 'Admin'
   resources :book_issues
   resources :books
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :authors
   resources :users 
+  resources :shops
 
   match "/404", to: "application#record_not_found", via: :all
   match "/500", to: "application#internal_server_error", via: :all

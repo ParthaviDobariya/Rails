@@ -1,17 +1,17 @@
 class HomePagesController < ApplicationController
-  
   def index
-    if params[:book_id].present? || params[:isbn_no].present? || params[:year].present? || params[:author_id].present? || params[:publication_id].present? || params[:category_id].present? 
-      book_title = Book.find_by_id(params[:book_id]).title if params[:book_id].present?
-      @books = Book.joins(:authors, :categories).where("isbn_no LIKE ? AND YEAR(publish_date) LIKE ? AND publication_id LIKE ? AND books_authors.author_id LIKE ? AND books_categories.category_id LIKE ?", "%#{params[:isbn_no]}%", "%#{params[:year]}%", "%#{params[:publication_id]}%", "%#{params[:author_id]}%", "%#{params[:category_id]}%").order(:title).page(params[:page]).per(3)
-      @year           = params[:year]
-      @publication_id = params[:publication_id]
-      @category       = params[:category_id]
-      @author         = params[:author_id]
-      @book           = params[:book_id]
-    else
-      @books = Book.order(:title).page(params[:page]).per(3)
-    end
+    conditions = {}
+    # conditions[:"publish_date.year"]          = params[:year] if params[:year].present?
+    conditions[:isbn_no]                      = params[:isbn_no] if params[:isbn_no].present?
+    conditions[:id]                           = params[:book_id] if params[:book_id].present?
+    conditions[:publication_id]               = params[:publication_id] if params[:publication_id].present?
+    conditions[:"books_categories.category_id"] = params[:category_id] if params[:category_id].present?
+    @books = Book.joins(:categories).where(conditions).order(:title).page(params[:page]).per(3)
+    @year           = params[:year]
+    @publication_id = params[:publication_id]
+    @category       = params[:category_id]
+    @author         = params[:author_id]
+    @book           = params[:book_id]
     if params[:email].present? 
       UserMailer.with(user: params[:email]).book_detail.deliver_later
     end
@@ -23,4 +23,8 @@ class HomePagesController < ApplicationController
     render json: data
   end
 
+  def references
+    references = Book.where('isbn_no LIKE ?', "%#{params[:term]}%").pluck(:isbn_no)
+    render json: references, status: :ok
+  end
 end
