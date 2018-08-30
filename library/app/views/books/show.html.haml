@@ -19,6 +19,9 @@
     %strong Pages:
     = @book.pages
   %p
+    %strong Publications:
+    = @book.publication.name
+  %p
     %strong Author:
     - @book.authors.each do |author|
       = author.name

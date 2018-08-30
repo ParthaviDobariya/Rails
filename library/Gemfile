@@ -4,8 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 # background job
 gem 'sidekiq'
+# dependent drop-down autocomplete
 gem 'jquery-ui-rails'
+# html to haml
 gem "haml-rails"
+# map
 gem 'geocoder'
 # pagination gem
 gem 'kaminari'
@@ -47,6 +50,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # tests
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -64,10 +69,17 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  # for should and validations
+  gem 'shoulda-matchers'
+  # for assigns and render_templates
+  gem 'rails-controller-testing'
+  # for dummy data
+  gem 'factory_bot_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
+# nested form
 gem 'cocoon'
 gem 'jquery-rails'

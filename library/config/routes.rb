@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   resources :publications
   resources :categories
   resources :authors
-  resources :users 
+  resources :users
   resources :shops
+  resources :static_pages, path: 'terms-condition' do
+    get '/term-condition',    to: 'static_pages#term_condition', on: :collection
+  end
 
   match "/404", to: "application#record_not_found", via: :all
   match "/500", to: "application#internal_server_error", via: :all

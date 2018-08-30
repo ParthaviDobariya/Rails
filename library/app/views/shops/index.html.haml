@@ -11,7 +11,7 @@
       %ul.nav.navbar-nav.right
         %li#new_link= link_to 'Add New Shop', new_shop_path, class: " new_link"
   .container.tab-content
-    #shop.container.tab-pane
+    #shop.tab-pane.active
       .row
         - @shops.each do |shop|
           .col-lg-4.col-md-6.mb-4
@@ -39,7 +39,7 @@
                 = link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' }
       .pagination.justify-content-center
         = paginate @shops
-    #map.container.tab-pane  
+    #map.tab-pane  
       #map_wrapper
         #map_canvas.mapping
           :javascript
@@ -74,7 +74,7 @@
                   marker = new google.maps.Marker({
                       position: position,
                       map: map,
-                      icon: '/assets/icon.png' 
+                      //icon: '/assets/icon.png' 
                   });
                   
                   // Allow each marker to have an info window    
