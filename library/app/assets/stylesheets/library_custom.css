@@ -3,10 +3,14 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
+/*toggle button */
+.nav-link.new_link {
+  color: black;
+}
 
  /*map*/
  #map_wrapper {
-    height: 400px;
+    height: 500px;
 }
 
 #map_canvas {
@@ -20,11 +24,11 @@ body {
 
 .error {
     margin-top: 200px;
-    margin-left: 200px; 
+    margin-left: 200px;
 }
 
 h2 {
-    margin-top: 150px;  
+    margin-top: 150px;
 }
 
 .notice {
@@ -126,7 +130,7 @@ footer {
     }
     footer {
         margin-left: 150px;
-        height: 30px; 
+        height: 30px;
         font-size: 14px;
     }
     .form {

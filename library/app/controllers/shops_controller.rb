@@ -5,11 +5,9 @@ class ShopsController < ApplicationController
   # GET /shops.json
   def index
     @shops = Shop.order(:name).page(params[:page]).per(3)
-    @address = Shop.all.map{ |shop| [shop.latitude, shop.longitude ] }
-    @detail = Shop.all.map{ |shop| [shop.name,shop.address ] }
   end
 
-  # GET /shops/1  
+  # GET /shops/1
   # GET /shops/1.json
   def show
   end

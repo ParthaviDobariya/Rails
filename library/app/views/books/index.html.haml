@@ -1,73 +1,134 @@
 .main
   %nav.navbar.navbar-default
     .container-fluid
-      %ul.nav.navbar-nav
-        %li#main_title Books
+      %ul.nav.nav-tabs
+        %li.nav-item
+          %a.nav-link.new_link{"data-toggle": "tab", href: "#book"} Book List
+        %li.nav-item
+          %a.nav-link.new_link{"data-toggle": "tab", href: "#map"} Shop Map
       %ul.nav.navbar-nav.right
         %li#new_link= link_to 'Add New Book', new_book_path, class: " new_link"
-  .container   
-    .row
-      - @books.each do |book|
-        .col-lg-4.col-md-6.mb-4
-          .card
-            %h3.card-header= book.title
-            .card-body
-              .row
-                - if book.image.attached?
-                  = image_tag(book.image.variant(resize: "300x500"), class: "img-fluid")
-              .form-group.row
-                .col-6
-                  ISBN No.
-                .col-6
-                  = book.isbn_no
-              .form-group.row
-                .col-6
-                  Publish Date
-                .col-6
-                  = book.publish_date
-              .form-group.row
-                .col-6
-                  Publication
-                .col-6
-                  = book.publication.name
-              .form-group.row
-                .col-6
-                  Authors
-                .col-6
-                  - book.authors.each do |author|
-                    = author.name
-              .form-group.row
-                .col-6
-                  Category
-                .col-6
-                  - book.categories.each do |category|
-                    = category.name
-              .form-group.row
-                .col-6
-                  Number of Pages
-                .col-6
-                  = book.pages
-              .form-group.row
-                .col-6
-                  Number of Available Books
-                .col-6
-                  = book.number_of_books
-              .form-group.row
-                .col-6
-                  Shops
-                .col-6
-                  - book.shops.each do |shop|
-                    = shop.name
-              .form-group.row
-                .col-6
-                  Users
-                .col-6
-                  - book.users.each do |user|
-                    = user.name
+  .container.tab-content
+    #book.tab-pane.active
+      .row
+        - @books.each do |book|
+          .col-lg-4.col-md-6.mb-4
+            .card
+              %h3.card-header= book.title
+              .card-body
+                .row
+                  - if book.image.attached?
+                    = image_tag(book.image.variant(resize: "300x500"), class: "img-fluid")
+                .form-group.row
+                  .col-6
+                    ISBN No.
+                  .col-6
+                    = book.isbn_no
+                .form-group.row
+                  .col-6
+                    Publish Date
+                  .col-6
+                    = book.publish_date
+                .form-group.row
+                  .col-6
+                    Publication
+                  .col-6
+                    = book.publication.name
+                .form-group.row
+                  .col-6
+                    Authors
+                  .col-6
+                    - book.authors.each do |author|
+                      = author.name
+                .form-group.row
+                  .col-6
+                    Category
+                  .col-6
+                    - book.categories.each do |category|
+                      = category.name
+                .form-group.row
+                  .col-6
+                    Number of Pages
+                  .col-6
+                    = book.pages
+                .form-group.row
+                  .col-6
+                    Number of Available Books
+                  .col-6
+                    = book.number_of_books
+                .form-group.row
+                  .col-6
+                    Shops
+                  .col-6
+                    - book.shops.each do |shop|
+                      = shop.name
+                .form-group.row
+                  .col-6
+                    Users
+                  .col-6
+                    - book.users.each do |user|
+                      = user.name
 
-            .card-footer
-              = link_to 'Show', book
-              = link_to 'Edit', edit_book_path(book)
-              = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
-    .pagination.justify-content-center
-      = paginate @books
+              .card-footer
+                = link_to 'Show', book
+                = link_to 'Edit', edit_book_path(book)
+                = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+      .pagination.justify-content-center
+        = paginate @books
+    #map.tab-pane
+      #map_wrapper
+        #map_canvas.mapping
+          :javascript
+            function initialize() {
+              var map;
+              var shop = [];
+              var bounds = new google.maps.LatLngBounds();
+              var mapOptions = {
+                  mapTypeId: 'roadmap'
+              };
+
+              // Display a map on the page
+              map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+              map.setTilt(45);
+
+              // Multiple Markers
+              var markers = #{raw @address.to_json}
+              var details = #{raw @detail.to_json}
+              // Display multiple markers on a map
+              var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+              // custom iarker
+              //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+              // Loop through our array of markers & place each one on the map
+              for( i = 0; i < markers.length; i++ )
+              {
+                  shop[i] = '<div class="info_content">' +
+                            '<h5>' + details[i][0] + '</h5>'+
+                            '<p>'  + details[i][1] + '</p>' + '</div>';
+                  var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
+                  bounds.extend(position);
+                  marker = new google.maps.Marker({
+                      position: position,
+                      map: map,
+                      //icon: '/assets/icon.png'
+                  });
+
+                  // Allow each marker to have an info window
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                      return function() {
+                          infoWindow.setContent(shop[i]);
+                          infoWindow.open(map, marker);
+                      }
+                  })(marker, i));
+
+                  // Automatically center the map fitting all markers on the screen
+                  map.fitBounds(bounds);
+              }
+
+              // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+              var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                  this.setZoom(7);
+                  google.maps.event.removeListener(boundsListener);
+              });
+            }
+%script{src: "//maps.googleapis.com/maps/api/js?key=AIzaSyAiJNfed7HBLMu23iVILURSuQ7Sw15aO4s&callback=initialize"}
