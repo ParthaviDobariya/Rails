@@ -5,6 +5,8 @@
         %li.nav-item
           %a.nav-link.new_link{"data-toggle": "tab", href: "#book"} Book List
         %li.nav-item
+          %a.nav-link.new_link{"data-toggle": "tab", href: "#shop"} Shop List
+        %li.nav-item
           %a.nav-link.new_link{"data-toggle": "tab", href: "#map"} Shop Map
       %ul.nav.navbar-nav.right
         %li#new_link= link_to 'Add New Book', new_book_path, class: " new_link"
@@ -18,7 +20,7 @@
               .card-body
                 .row
                   - if book.image.attached?
-                    = image_tag(book.image.variant(resize: "300x500"), class: "img-fluid")
+                    = image_tag(book.image.variant(resize: "300x400"), class: "img-fluid")
                 .form-group.row
                   .col-6
                     ISBN No.
@@ -75,6 +77,29 @@
                 = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
       .pagination.justify-content-center
         = paginate @books
+    #shop.tab-pane
+      .container
+        .row
+          - @shops.each do |shop|
+            .col-lg-4.col-md-6.mb-4
+              .card
+                %h3.card-header= shop.name
+                .card-body
+                  .form-group.row
+                    .col-4
+                      Address
+                    .col-8
+                      = shop.address
+                  .form-group.row
+                    .col-4
+                      Latitude
+                    .col-8
+                      = shop.latitude
+                  .form-group.row
+                    .col-4
+                      Longitude
+                    .col-8
+                      = shop.longitude
     #map.tab-pane
       #map_wrapper
         #map_canvas.mapping

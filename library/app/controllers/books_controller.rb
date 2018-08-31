@@ -4,9 +4,10 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.order(:title).page(params[:page]).per(3)
+    @books   = Book.order(:title).page(params[:page]).per(3)
+    @shops   = Shop.order(:name).page(params[:page]).per(3)
     @address = Shop.all.map{ |shop| [shop.latitude, shop.longitude ] }
-    @detail = Shop.all.map{ |shop| [shop.name,shop.address ] }
+    @detail  = Shop.all.map{ |shop| [shop.name,shop.address ] }
   end
 
   # GET /books/1
