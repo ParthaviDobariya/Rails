@@ -3,6 +3,11 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
+/* No record */
+.record {
+  padding-left: 200px;
+}
+
 /*toggle button */
 .nav-link.new_link {
   color: black;

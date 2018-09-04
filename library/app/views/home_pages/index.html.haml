@@ -11,7 +11,7 @@
         = f.submit "Search", class: "btn text-uppercase"
     .col-xs-9.col-sm-7.col-lg-9.mx-auto
       - if @books.empty?
-        %h2= "No Record Found"
+        %h2.record= "No Record Found"
       -else
         %table.table.table-responsive
           %tr
@@ -21,6 +21,7 @@
             %th Publication
             %th Authors
             %th Catgories
+            %th
           - @books.each do |book|
             %tr
               %td= book.title
@@ -41,7 +42,7 @@
                   .modal-dialog
                     .modal-content
                       .modal-header
-                        %h4.modal-title 
+                        %h4.modal-title
                           Enter Email Address
                       = form_with(url: home_pages_path, method: :get, local: true) do |form|
                         .modal-body
